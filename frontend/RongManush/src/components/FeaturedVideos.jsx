@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FaYoutube, FaArrowRight } from "react-icons/fa";
+import axios from "axios";
 
 export default function FeaturedVideos() {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/videos/")
-      .then((res) => res.json())
-      .then((data) => setVideos(data))
+    axios
+      .get("http://localhost:8000/api/videos/")
+      .then((res) => setVideos(res.data))
       .catch((err) => console.error("Error fetching videos", err));
   }, []);
 
